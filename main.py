@@ -171,7 +171,7 @@ class Particle:
             self.yvel = random.randint(min_yvel, max_yvel) / 10
         else:
             self.yvel = random.randint(max_yvel, min_yvel) / 10
-        self.radius = random.randint(min_radius, max_radius)
+        self.radius = random.randint(min_radius, max_radius if max_radius > 1 else max_radius + 1)
         self.shrink_rate = shrink_rate
         self.gravity = gravity
 
@@ -206,7 +206,7 @@ while True:
     clock.tick(60)
     mx, my = pygame.mouse.get_pos()
     for event in pygame.event.get():
-        if event.type == QUIT:
+        if event.type == QUIT or event.type == KEYDOWN and event.key == pygame.K_ESCAPE:
             sys.exit()
             pygame.quit()
 
